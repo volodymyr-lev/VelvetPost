@@ -12,10 +12,16 @@
     width: 100%;
     list-style: none;
     align-items: center;
+    justify-content: space-between;
     padding-left: 3%;
     position: relative;
 }
   
+.navbar-left{
+    display: flex;
+    flex-direction: row;
+}
+
 .navbar-item {
     position: relative;
     color: white;

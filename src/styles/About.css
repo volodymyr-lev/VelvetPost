@@ -2,9 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    padding: 40px 5%;
-    height: 80vh;
+    height: 92vh;
+    overflow: hidden;
 }
 
 .about-side {
@@ -71,4 +70,37 @@
 .dot.magenta:hover {
     box-shadow: 0 0 8px 4px #a472ff;
     transform: scale(1.2);
+}
+
+.about.loaded .letter-left {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.8s ease;
+}
+
+.about.loaded .letter-right {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.8s ease;
+}
+
+.letter-left {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+.letter-right {
+    opacity: 0;
+    transform: translateX(100px);
+}
+
+.about-center {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease 0.5s;
+}
+
+.about.loaded .about-center {
+    opacity: 1;
+    transform: translateY(0);
 }

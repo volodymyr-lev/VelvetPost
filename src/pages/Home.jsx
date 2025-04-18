@@ -11,7 +11,7 @@ export default function Home(){
             </div>
             <div className="home-right">
                 <h1 className="home-title">Надсилай безпечно</h1>
-                <p className="home-subtitle">VelvetPost — це не черговий поштовий сервіс. Ми не граємо вашими посилками в футбол.</p>
+                <p className="home-subtitle">VelvetPost — це не черговий поштовий сервіс. Ми не граємо вашими посилками в футбол</p>
             </div>
         </div>
     );
