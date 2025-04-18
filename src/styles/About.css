@@ -1,0 +1,74 @@
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 5%;
+    height: 80vh;
+}
+
+.about-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.about-center {
+    flex: 2;
+    max-width: 600px;
+    text-align: center;
+}
+
+.about-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ebebeb;
+}
+
+.about-text {
+    font-size: 18px;
+    color: #acacac;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.pixel-art {
+    display: flex;
+    gap: 40px;
+}
+
+.pixel-letter {
+    display: grid;
+    grid-template-columns: repeat(8, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 4px;
+}
+
+.dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.white {
+    background-color: rgb(255, 255, 255);
+}
+
+.magenta {
+    background-color: #a472ff;
+}
+
+.empty {
+    background-color: transparent;
+}
+
+
+.dot.white:hover {
+    box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.dot.magenta:hover {
+    box-shadow: 0 0 8px 4px #a472ff;
+    transform: scale(1.2);
+}
