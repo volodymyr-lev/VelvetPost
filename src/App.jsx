@@ -16,6 +16,7 @@ import PostOffices from "./pages/PostOffices"
 import Terminals from "./pages/Terminals"
 import Employees from "./pages/Employees"
 import Clients from "./pages/Clients"
+import Shipments from "./pages/Shipments"
 
 function App() {
 	return(
@@ -50,6 +51,11 @@ function App() {
 					<Route path="/clients" element={
 						<PrivateRoute allowedRoles={["Admin"]}>
 							<Clients/>
+						</PrivateRoute>
+					}/>
+					<Route path="/shipments" element={
+						<PrivateRoute allowedRoles={["Admin"]}>
+							<Shipments/>
 						</PrivateRoute>
 					}/>
 				</Routes>

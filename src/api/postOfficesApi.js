@@ -6,12 +6,12 @@ export const getPostOffices = async ()=>{
     const token = localStorage.getItem("token");
 
     try{
-        const responce = await axios.get("https://localhost:7047/api/PostOffices", {
+        const response = await axios.get("https://localhost:7047/api/PostOffices", {
             headers:{
                 Authorization: `Bearer ${token}`
             }
         })
-        return responce.data;
+        return response.data;
     } catch (error) {
         console.error("Помилка під час отримання поштових відділень: ", error);
     }
@@ -37,4 +37,63 @@ export const fetchCoordinatesFromPostOffices = async (postOffices) =>{
     )
 
     return results.filter(Boolean);
+}
+
+export const updatePostOffice = async (id, updated)=>{
+    try{
+        const token = localStorage.getItem("token");
+        const response = await axios.put(
+            `https://localhost:7047/api/PostOffices/${id}`,
+            updated,
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+
+        return response.data;
+    } catch(error) {
+        console.error("Помилка при оновленні: ", error);
+        return null;
+    }
+}
+
+export const deletePostOffice = async (id)=>{
+    try{
+        const token = localStorage.getItem("token");
+        const response = await axios.delete(
+            `https://localhost:7047/api/PostOffices/${id}`,
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+
+        return response.data;
+    } catch(error) {
+        console.error("Помилка при видаленні: ", error);
+        return null
+    } 
+}
+
+export const createPostOffice = async (postOffice) =>{
+    try{
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+            `https://localhost:7047/api/PostOffices/create`,
+            postOffice,
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+
+        return response.data;
+    } catch (error) {
+        console.log("Помилка при створенні: ", error);
+        return null;
+    }
 }

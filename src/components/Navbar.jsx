@@ -55,6 +55,13 @@ export default function Navbar(){
                                     Клієнти
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to="/shipments" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Відправлення
+                                </NavLink>
+                            </li>
                         </>
                     )}
                 </div>
