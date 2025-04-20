@@ -1,0 +1,66 @@
+.profile-container {
+    background: linear-gradient(145deg, #2e2e2e, #252525);
+    width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+    transform: translateY(-5px);
+    /*box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);*/
+    box-shadow: 0 16px 32px #a472ff;
+}
+
+.profile-container-title {
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.profile-container-text {
+    color: #ccc;
+    margin: 15px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.profile-container-info {
+    color: #a472ff;
+    font-weight: 500;
+}
+
+
+.map-container {
+    flex: 1;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.map-container-map {
+    flex: 1;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.map-container .leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: #222;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}

@@ -22,12 +22,13 @@ export const AuthProvider = ({children})=>{
 	};
 
     const logout = () => {
+        console.log("Деавторизація.")
 		localStorage.clear();
 		setIsAuthenticated(false);
 	};
 
     return (
-        <AuthContext.Provider valye = {{isAuthenticated, login, logout}}>
+        <AuthContext.Provider value = {{isAuthenticated, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

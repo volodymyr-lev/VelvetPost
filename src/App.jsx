@@ -12,6 +12,10 @@ import Navbar from "./components/Navbar"
 import Profile from "./pages/Profile"
 import PrivateRoute from "./routing/PrivateRoute"
 import { AuthProvider } from "./context/AuthContext"
+import PostOffices from "./pages/PostOffices"
+import Terminals from "./pages/Terminals"
+import Employees from "./pages/Employees"
+import Clients from "./pages/Clients"
 
 function App() {
 	return(
@@ -24,8 +28,28 @@ function App() {
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/register" element={<Register/>}/>
 					<Route path="/profile" element={
-						<PrivateRoute>
+						<PrivateRoute allowedRoles={["Admin","Client","PostOfficeEmployee","TerminalEmployee"]}>
 							<Profile/>
+						</PrivateRoute>
+					}/>
+					<Route path="/postOffices" element={
+						<PrivateRoute allowedRoles={["Admin"]}>
+							<PostOffices/>
+						</PrivateRoute>
+					}/>
+					<Route path="/terminals" element={
+						<PrivateRoute allowedRoles={["Admin"]}>
+							<Terminals/>
+						</PrivateRoute>
+					}/>
+					<Route path="/employees" element={
+						<PrivateRoute allowedRoles={["Admin"]}>
+							<Employees/>
+						</PrivateRoute>
+					}/>
+					<Route path="/clients" element={
+						<PrivateRoute allowedRoles={["Admin"]}>
+							<Clients/>
 						</PrivateRoute>
 					}/>
 				</Routes>

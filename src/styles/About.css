@@ -41,6 +41,7 @@
     grid-template-columns: repeat(8, 30px);
     grid-template-rows: repeat(10, 30px);
     gap: 4px;
+    
 }
 
 .dot {
@@ -51,10 +52,12 @@
 
 .white {
     background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 5px 1px #fff;
 }
 
 .magenta {
     background-color: #a472ff;
+    box-shadow: 0 0 5px 1px #a472ff;
 }
 
 .empty {

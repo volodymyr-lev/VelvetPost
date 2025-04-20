@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+    const navigate = useNavigate();
+	const { login } = useContext(AuthContext);
 
     const handleChange = (e) => {
         setFormData({
@@ -33,12 +36,9 @@ export default function Login() {
                 )
 
                 const { token, role, type, profile } = response.data;
-                localStorage.setItem("token", token);
-                localStorage.setItem("role", role);
-                localStorage.setItem("userType", type);
-                localStorage.setItem("profile", JSON.stringify(profile));
 
-                window.location.href = "/";
+                login(token, role, type, profile);
+                navigate("/");
 
                 console.log("Авторизація успішна:", response.data);
             } catch(error) {

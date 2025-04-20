@@ -1,0 +1,59 @@
+
+.admin-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 40px 20px; 
+    box-sizing: border-box;
+}
+
+.admin-guide {
+    height: 80vh; 
+    overflow-y: auto; 
+    max-width: 800px;
+    margin-bottom: 30px;
+    background-color: #2e2e2e;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    line-height: 1.6;
+    
+}
+
+.admin-guide h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #fff;
+}
+
+.admin-guide h4 {
+    margin-top: 20px;
+    color: #444;
+    font-size: 18px;
+    color: #a472ff;
+}
+
+.admin-guide p, .admin-guide ul {
+    margin-left: 20px;
+    color: #fff;
+}
+
+.admin-guide ul {
+    list-style: disc;
+}
+
+.admin-guide ul ul {
+    list-style: circle;
+    margin-top: 5px;
+}
+
+
+.admin-guide::-webkit-scrollbar {
+    width: 8px;
+}
+
+.admin-guide::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}

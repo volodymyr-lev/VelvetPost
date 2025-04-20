@@ -1,10 +1,11 @@
 import React, {useContext} from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/Navbar.css"
 
 export default function Navbar(){
     const { isAuthenticated, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     return(
         <nav className="navbar">
@@ -24,10 +25,43 @@ export default function Navbar(){
                             Про нас
                         </NavLink>
                     </li>
+                    {localStorage.getItem("role")==="Admin" &&(
+                        <>
+                            <li>
+                                <NavLink to="/postOffices" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Відділення
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/terminals" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Термінали
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/employees" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Працівники
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/clients" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Клієнти
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </div>
 
                 <div className="navbar-right">
 					{isAuthenticated ? (
+
 						<>
 							<li>
 								<NavLink to="/profile" className={({ isActive }) => isActive ? "navbar-item active" : "navbar-item"}>
@@ -35,7 +69,10 @@ export default function Navbar(){
 								</NavLink>
 							</li>
 							<li>
-								<button className="navbar-item logout-btn" onClick={logout}>
+								<button className="navbar-item logout-btn" onClick={()=>{
+                                    logout();
+                                    navigate("/");
+                                }}>
 									Вийти
 								</button>
 							</li>

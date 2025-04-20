@@ -1,0 +1,9 @@
+.container {
+    height: 87vh;
+    display: flex;
+    padding: 20px 60px;
+    gap: 40px;
+}
+
+
+  

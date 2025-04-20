@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Register.css";
 import axios from "axios";
 
 export default function Register() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         phoneNumber: "",
         email: "",
         address: "",
+        city: "",
         password: "",
         confirmPassword: "",
     });
@@ -33,6 +35,7 @@ export default function Register() {
                 lastName: formData.lastName,
                 phoneNumber: formData.phoneNumber,
                 email: formData.email,
+                city: formData.city,
                 address: formData.address,
                 password: formData.password,
             }
@@ -43,6 +46,7 @@ export default function Register() {
                     userData
                 )
                 console.log("Реєстрація успішна:", response.data);
+                navigate("/");
 
             }  catch (error) {
                 console.error("Помилка під час реєстрації:", error);
@@ -82,6 +86,14 @@ export default function Register() {
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             placeholder="Номер телефону"
+                            onChange={handleChange}
+                            required
+                        />
+                        <input
+                            type="text"
+                            name="city"
+                            value={formData.city}
+                            placeholder="Місто"
                             onChange={handleChange}
                             required
                         />
