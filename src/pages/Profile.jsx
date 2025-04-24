@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { getPostOffices, fetchCoordinatesFromPostOffices } from "../api/postOfficesApi";
-import {geocode, setKey, setLanguage, setRegion} from "react-geocode";
+import { setKey, setLanguage, setRegion} from "react-geocode";
 import "leaflet/dist/leaflet.css";
 import "../styles/Profile.css"
 import ClientProfile from "../components/ClientProfile";
 import AdminProfile from "../components/AdminProfile";
-
-
-// map conf
-
 
 const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 //Geocode conf

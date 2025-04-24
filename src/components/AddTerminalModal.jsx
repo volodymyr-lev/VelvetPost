@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import { createPostOffice } from "../api/postOfficesApi";
-import "../styles/AddPostOfficeModal.css"
+import { createTerminal } from "../api/terminalsApi";
+import "../styles/AddTerminalModal.css"
 
-export const AddPostOfficeModal = ({setIsVisible, refresh })=>{
+export const AddTerminalModal = ({setIsVisible, refresh })=>{
     const [formData, setFormData] = useState({
         name: "",
         address: "",
         city: "",
-        phoneNumber: "",
-        terminalId: -1
-    });
-
-    const isFormValid = () => {
-        return formData.name && formData.address && formData.city && formData.phoneNumber && formData.terminalId !== -1;
-    };
+        type: "",
+    })
 
     const handleChange = (e) => {
         setFormData({
@@ -22,21 +17,25 @@ export const AddPostOfficeModal = ({setIsVisible, refresh })=>{
         })
     }
 
+    const isFormValid = () => {
+        return formData.name && formData.address && formData.city && formData.type;
+    };
+
     const handleAdd = () =>{
         if (!isFormValid()) {
             alert("Будь ласка, заповніть всі поля.");
             return;
         }
-
         try{
-            const createPO = async ()=>{
-                const po = formData;
-                await createPostOffice(po);
+            const createT = async ()=>{
+                const t = formData;
+                await createTerminal(t);
                 console.log("Створено.");
                 await refresh();
+                setIsVisible(false);
             }
 
-            createPO();
+            createT();
 
         } catch(error) {
             console.error("Помилка під час створення: ", error);
@@ -50,7 +49,7 @@ export const AddPostOfficeModal = ({setIsVisible, refresh })=>{
             <div className="centered">
                 <div className="modal">
                     <div className="modal-header">
-                        <h5 className="header">Додати відділення</h5>
+                        <h5 className="header">Додати термінал</h5>
                     </div>
 
                     <button className="close-button" onClick={() => setIsVisible(false)}>
@@ -90,22 +89,12 @@ export const AddPostOfficeModal = ({setIsVisible, refresh })=>{
                                 />
                             </label>
                             <label className="form-label">
-                                Номер телефону:
+                                Тип
                                 <input
                                     className="form-input"
                                     type="text"
-                                    name="phoneNumber"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label className="form-label">
-                                ID терміналу:
-                                <input
-                                    className="form-input"
-                                    type="text"
-                                    name="terminalId"
-                                    value={formData.terminalId}
+                                    name="type"
+                                    value={formData.type}
                                     onChange={handleChange}
                                 />
                             </label>

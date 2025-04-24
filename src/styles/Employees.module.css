@@ -1,0 +1,256 @@
+/* Employees.module.css - Повністю оновлений дизайн */
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+    opacity: 0;
+    transform: translateY(30px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
+
+@keyframes gradientBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    width: 90%;
+    max-width: 1400px;
+    margin: 40px auto;
+    border-radius: 24px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--highlight));
+    background-size: 200% 200%;
+    animation: gradientBg 5s ease infinite;
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 50px;
+    border-bottom: 1px solid var(--border-color);
+    animation: slideInUp 0.7s ease-out forwards;
+}
+
+.headerTopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.headerTitle {
+    color: var(--text-light);
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0;
+    position: relative;
+    letter-spacing: -0.5px;
+}
+
+.headerTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 70px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.searchInput {
+    background-color: var(--input-bg);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    color: var(--text-light);
+    font-size: 16px;
+    width: 360px;
+    padding: 16px 24px;
+    outline: none;
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.searchInput::placeholder {
+    color: var(--text-secondary);
+}
+
+.searchInput:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.searchTypeContainer {
+    margin-top: 20px;
+}
+
+.headerText {
+    display: block;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.radioButtonsAndTexts {
+    display: flex;
+    gap: 40px;
+}
+
+.radioButtonOption {
+    position: relative;
+}
+
+.radioButtonText {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.radioButtonText:hover {
+    color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.radioButtonText input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radioButtonText input[type="radio"]:checked {
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.radioButtonText input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.contentContainer {
+    padding: 40px 50px;
+    flex: 1;
+}
+
+.employeeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 20px;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.noResults {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: var(--text-secondary);
+    font-size: 18px;
+    text-align: center;
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.addButton{
+    width: 100px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top:58px;
+    left: 320px;
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+@keyframes slideDown {
+    0% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+    
+}
+
+.addButton:hover {
+    background-color: var(--primary-light);
+    animation: slideUp 0.3s ease forwards;
+}
+
+.addButton:not(:hover) {
+    animation: slideDown 0.3s ease forwards;
+}

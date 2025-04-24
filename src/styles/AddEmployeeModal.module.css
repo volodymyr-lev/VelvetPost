@@ -1,0 +1,208 @@
+
+.back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.2s ease-out;
+}
+  
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    animation: scaleIn 0.2s ease-out;
+}
+
+.modal{
+    background-color: #333333;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 700px;
+    overflow: hidden;
+    position: relative;
+    padding: 16px;
+}
+
+.header{
+    color:#fff;
+}
+
+.modalHeader {
+    padding: 16px 24px;
+    border-bottom: 1px solid #757575;
+    display: flex;
+    align-items: center;
+}
+
+.depChooseHeader{
+    padding: 0% 24px;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.depChoose{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.depChoose label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    position: relative;
+    cursor: pointer;
+}
+
+.depChoose input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 50%;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.depChoose input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5px); }
+}
+
+@keyframes slideDown{
+    0% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.radioLabel:hover{
+    animation: slideUp 0.3s ease forwards;
+}
+
+.radioLabel:not(:hover){
+    animation: slideDown 0.3s ease forwards;
+}
+
+.dataHeader{
+    padding: 0% 24px;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.dataForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dataForm input[type="text"],
+.dataForm input[type="email"],
+.dataForm input[type="password"],
+.dataForm input[type="tel"] {
+    width: 15vw;
+    padding: 10px;
+    margin: 10px 10px;
+    background-color: #333;
+    border: 1px solid #757575;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #fff;
+    height: 30px;
+}
+
+.dataForm input[type="text"]:focus,
+.dataForm input[type="email"]:focus,
+.dataForm input[type="password"]:focus,
+.dataForm input[type="tel"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.dataFormWide input[type="password"]{
+    width: 32vw;;
+}
+
+
+.dataFormPassword{
+    margin-top: 10px;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 50px;
+}
+  
+.saveButton, .cancelButton {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+  
+.saveButton {
+    background-color: #a472ff;
+    color: white;
+    border: none;
+}
+  
+.saveButton:hover {
+    background-color: #965eff;
+    animation: slideUp 0.3s ease forwards;
+}
+
+.saveButton:not(:hover){
+    animation: slideDown 0.3s ease forwards;
+}
+  
+.cancelButton {
+    background-color: white;
+    color: #666;
+    border: 1px solid #ddd;
+}
+  
+.cancelButton:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    animation: slideUp 0.3s ease forwards;
+}
+
+.cancelButton:not(:hover){
+    animation: slideDown 0.3s ease forwards;
+}

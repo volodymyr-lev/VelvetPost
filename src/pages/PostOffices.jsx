@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-
 import "../styles/PostOffices.css"
 import { deletePostOffice, fetchCoordinatesFromPostOffices, getPostOffices, updatePostOffice } from "../api/postOfficesApi";
 import { AddPostOfficeModal } from "../components/AddPostOfficeModal";
-
 
 export default function PostOffices(){
     const [postOffices, setPostOffices] = useState([]);
@@ -18,18 +16,19 @@ export default function PostOffices(){
     })
     const [isVisible, setIsVisible] = useState(false);
 
-    useEffect(()=>{
-        const fetchPostOffices = async ()=>{
-            try{
-                const po = await getPostOffices();
-                const officesWithCoords = await fetchCoordinatesFromPostOffices(po);
-                setPostOffices(officesWithCoords);
-                console.log(officesWithCoords);
-            } catch(error) {
-                console.error("Помилка під час отримання відділень: ", error);
-            }
+    const fetchPostOffices = async ()=>{
+        try{
+            const po = await getPostOffices();
+            po.sort((a, b)=>(a.name.localeCompare(b.name)));
+            const officesWithCoords = await fetchCoordinatesFromPostOffices(po);
+            setPostOffices(officesWithCoords);
+            console.log(officesWithCoords);
+        } catch(error) {
+            console.error("Помилка під час отримання відділень: ", error);
         }
+    }
 
+    useEffect(()=>{
         fetchPostOffices();
     }, []);
 
@@ -56,6 +55,7 @@ export default function PostOffices(){
             const updated = { ...selectedOffice, ...formData };
             await updatePostOffice(updated.id, updated);
             console.log("Успішно оновлено.");
+            await fetchPostOffices();
         } catch(error){
             console.error("Помилка під час збереження: ", error);
         }
@@ -67,6 +67,7 @@ export default function PostOffices(){
             console.log("Deleting ", id);
             await deletePostOffice(id);
             console.log("Видалено.");
+            await fetchPostOffices();
         } catch(error) {
             console.error("Помилка під час видалення: ", error);
         }
@@ -153,7 +154,7 @@ export default function PostOffices(){
             </div>
 
             {isVisible && (
-                <AddPostOfficeModal setIsVisible={setIsVisible}/>
+                <AddPostOfficeModal setIsVisible={setIsVisible} refresh={fetchPostOffices}/>
             )}
         </div>
     )
