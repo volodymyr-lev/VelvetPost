@@ -1,6 +1,7 @@
 
 import React from "react";
 import styles from "../styles/AddEmployeeModal.module.css";
+import { createEmployee } from "../api/employeesApi";
 
 export const AddEmployeeModal = ({setIsVisible, refresh })=>{
     const [formData, setFormData] = React.useState({
@@ -15,9 +16,6 @@ export const AddEmployeeModal = ({setIsVisible, refresh })=>{
         confirmPassword: "",
     });
     
-    const [postOffices, setPostOffices] = React.useState([]);
-    const [terminals, setTerminals] = React.useState([]);
-
     const [radioValue, setRadioValue] = React.useState("postOffice");
     
     // PARSE DEP ID TO NUMBER WHEN SUBMITTING FORM
@@ -33,7 +31,7 @@ export const AddEmployeeModal = ({setIsVisible, refresh })=>{
         try{
             const createE = async ()=>{
                 const e = { ...formData, depId: Number(formData.depId) };
-                //await createEmployee(e);
+                await createEmployee(e);
                 console.log("Створено.");
                 await refresh();
                 setIsVisible(false);
@@ -68,7 +66,7 @@ export const AddEmployeeModal = ({setIsVisible, refresh })=>{
                                     setRadioValue(e.target.value)
                                     setFormData({ ...formData, depType: e.target.value });
                                 }}
-                            />
+                            />              
                             Відділення
                         </label>
                         <label className={styles.radioLabel}>
