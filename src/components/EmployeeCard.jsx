@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles/EmployeeCard.module.css";
 
-export const EmployeeCard = ({ employee }) => {
+export const EmployeeCard = ({ employee, onClick, className, style }) => {
     return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`} onClick={onClick} style={style}>
         <div className={styles.avatar}>
             {employee.employee.firstName.charAt(0)}{employee.employee.lastName.charAt(0)}
         </div>
@@ -25,7 +25,11 @@ export const EmployeeCard = ({ employee }) => {
                 <div className={styles.detailItem}>
                     <span className={styles.detailLabel}>Місце:</span>
                     <span className={styles.detailValue}>
-                        {employee.postOffice.name || employee.terminal.name || "Не призначено"}
+                        {employee.postOffice
+                        ? `${employee.postOffice.name} – ${employee.postOffice.city}`
+                        : employee.terminal
+                        ? `${employee.terminal.name} – ${employee.terminal.city}`
+                        : "Не призначено"}
                     </span>
                 </div>
             </div>
