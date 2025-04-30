@@ -71,3 +71,61 @@ export const createEmployee = async (employee) => {
         throw error;
     }
 }
+
+
+// update employee
+export const updateEmployee = async (id, formData) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        let response = null;
+        if(formData.depType === "postOffice"){
+            response = await axios.put(`https://localhost:7047/api/PostOfficeEmployees/${id}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } else if(formData.depType === "terminal") {
+            response = await axios.put(`https://localhost:7047/api/TerminalEmployees/${id}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } else {
+            throw new Error("Invalid depType. Must be either 'postOffice' or 'terminal'.");
+        }
+
+        return response.data;
+    } catch (error) {
+        console.error("Error updating employee: ", error);
+        throw error;
+    }
+}
+    
+export const deleteEmployee = async (id, depType) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        let response = null;
+        if(depType === "postOffice"){
+            response = await axios.delete(`https://localhost:7047/api/PostOfficeEmployees/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } else if(depType === "terminal") {
+            response = await axios.delete(`https://localhost:7047/api/TerminalEmployees/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } else {
+            throw new Error("Invalid depType. Must be either 'postOffice' or 'terminal'.");
+        }
+
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting employee: ", error);
+        throw error;
+    }
+}

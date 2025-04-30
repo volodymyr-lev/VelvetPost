@@ -3,6 +3,7 @@ import styles from "../styles/Employees.module.css";
 import { getPotsOfficeEmpoyees, getTerminalEmployees } from "../api/employeesApi";
 import { EmployeeCard } from "../components/EmployeeCard";
 import { AddEmployeeModal } from "../components/AddEmployeeModal";
+import { updateEmployee, deleteEmployee } from "../api/employeesApi";
 
 export default function Employees() {
     const [searchValue, setSearchValue] = useState("");
@@ -14,13 +15,14 @@ export default function Employees() {
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     const [employeeChangeForm, setEmployeeChangeForm] = useState({
+        id: null,
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: "",
         position: "",
         depId: "",
-        depType: "",
+        depType: selectedEmployee?.postOffice ? "postOffice" : "terminal",
     });
 
     const fetchEmployees = async () => {
@@ -62,6 +64,35 @@ export default function Employees() {
     useEffect(() => {
         fetchEmployees();
     }, []);
+
+    const handleSave = async () => {
+        employeeChangeForm.depId = Number(employeeChangeForm.depId);
+        employeeChangeForm.id = Number(employeeChangeForm.id);
+
+        console.log("Saving employee: ", employeeChangeForm);
+
+        try{
+            await updateEmployee(employeeChangeForm.id, employeeChangeForm);
+            console.log("Employee updated successfully.");
+            await fetchEmployees();
+        } catch (error) {
+            console.error("Error updating employee: ", error);
+        }
+    }
+
+    const handleDelete = async () => {
+        employeeChangeForm.id = Number(employeeChangeForm.id);
+
+        console.log("Deleting employee: ", employeeChangeForm);
+
+        try{
+            await deleteEmployee(employeeChangeForm.id, employeeChangeForm.depType);
+            console.log("Employee deleted successfully.");
+            await fetchEmployees();
+        } catch (error) { 
+            console.error("Error deleting employee: ", error);
+        }
+    }
 
     return (
         <div className={styles.page}>
@@ -117,10 +148,21 @@ export default function Employees() {
                         <div className={styles.employeeGrid}>
                             {displayEmployees.map((employee, index) => (
                                 <EmployeeCard 
-                                    key={employee.id} 
+                                    key={employee.employeeId} 
                                     employee={employee}
                                     onClick={() => {
-                                        setSelectedEmployee(employee)}}
+                                        setSelectedEmployee(employee)
+                                        setEmployeeChangeForm({
+                                            id: employee.employee.id,
+                                            firstName: employee.employee.firstName,
+                                            lastName: employee.employee.lastName,
+                                            email: employee.employee.email,
+                                            phoneNumber: employee.employee.phoneNumber,
+                                            position: employee.employee.position,
+                                            depId: employee.postOffice?.id || employee.terminal?.id,
+                                            depType: employee.postOffice ? "postOffice" : "terminal",
+                                        });
+                                    }}
                                     className={`${styles.cardAppear}`}
                                     style={{ animationDelay: `${index * 0.1}s` }}
                                 />
@@ -155,14 +197,11 @@ export default function Employees() {
                         <label>Ім'я:</label>
                         <input
                             type="text"
-                            value={selectedEmployee.employee.firstName}
+                            value={employeeChangeForm.firstName}
                             onChange={(e) =>
-                                setSelectedEmployee({
-                                    ...selectedEmployee,
-                                    employee: {
-                                        ...selectedEmployee.employee,
-                                        firstName: e.target.value,
-                                    },
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    firstName: e.target.value,
                                 })
                             }
                         />
@@ -170,14 +209,11 @@ export default function Employees() {
                         <label>Прізвище:</label>
                         <input
                             type="text"
-                            value={selectedEmployee.employee.lastName}
+                            value={employeeChangeForm.lastName}
                             onChange={(e) =>
-                                setSelectedEmployee({
-                                    ...selectedEmployee,
-                                    employee: {
-                                        ...selectedEmployee.employee,
-                                        lastName: e.target.value,
-                                    },
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    lastName: e.target.value,
                                 })
                             }
                         />
@@ -185,29 +221,24 @@ export default function Employees() {
                         <label>Email:</label>
                         <input
                             type="email"
-                            value={selectedEmployee.employee.email}
+                            value={employeeChangeForm.email}
                             onChange={(e) =>
-                                setSelectedEmployee({
-                                    ...selectedEmployee,
-                                    employee: {
-                                        ...selectedEmployee.employee,
-                                        email: e.target.value,
-                                    },
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    email: e.target.value,
                                 })
+
                             }
                         />
 
                         <label>Телефон:</label>
                         <input
                             type="text"
-                            value={selectedEmployee.employee.phoneNumber}
+                            value={employeeChangeForm.phoneNumber}
                             onChange={(e) =>
-                                setSelectedEmployee({
-                                    ...selectedEmployee,
-                                    employee: {
-                                        ...selectedEmployee.employee,
-                                        phoneNumber: e.target.value,
-                                    },
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    phoneNumber: e.target.value,
                                 })
                             }
                         />
@@ -215,14 +246,11 @@ export default function Employees() {
                         <label>Посада:</label>
                         <input
                             type="text"
-                            value={selectedEmployee.employee.position}
+                            value={employeeChangeForm.position}
                             onChange={(e) =>
-                                setSelectedEmployee({
-                                    ...selectedEmployee,
-                                    employee: {
-                                        ...selectedEmployee.employee,
-                                        position: e.target.value,
-                                    },
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    position: e.target.value,
                                 })
                             }
                         />
@@ -230,15 +258,20 @@ export default function Employees() {
                         <label>ID Відділення/Термінала:</label>
                         <input
                             type="text"
-                            value={selectedEmployee.postOffice?.id || selectedEmployee.terminal?.id}
-                            disabled
+                            value={employeeChangeForm.depId}
+                            onChange={(e) =>
+                                setEmployeeChangeForm({
+                                    ...employeeChangeForm,
+                                    depId: e.target.value,
+                                })
+                            }
                         />
 
                         <div style={{ marginTop: "30px", display: "flex", gap: "15px" }}>
-                            <button className={styles.saveButton}>
+                            <button className={styles.saveButton} onClick={handleSave}>
                                 💾 Зберегти
                             </button>
-                            <button className={styles.deleteButton}>
+                            <button className={styles.deleteButton} onClick={handleDelete}>
                                 🗑️ Видалити
                             </button>
                         </div>

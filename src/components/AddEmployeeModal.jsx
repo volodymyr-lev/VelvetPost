@@ -138,7 +138,7 @@ export const AddEmployeeModal = ({setIsVisible, refresh })=>{
                             </div>
                             
 
-                            <div classNmae={styles.dataFormPosId}>
+                            <div className={styles.dataFormPosId}>
                             <label className={styles.formLabel}>
                                 <input
                                     type="text"

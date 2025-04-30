@@ -1,0 +1,681 @@
+/* src\styles\Clients.module.css */
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Анімації */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes moveToRight {
+    from {
+        width: 90%;
+        margin-right: 0;
+    }
+    to {
+        width: 70%;
+        margin-right: 5%;
+    }
+}
+
+@keyframes moveBackToCenter {
+    from {
+        margin-right: 5%;
+    }
+    to {
+        margin-right: 0;
+    }
+}
+
+/* Базові стилі сторінки */
+.page {
+    display: flex;
+    overflow: hidden;
+    height: 90vh;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    width: 90%;
+    max-width: 1400px;
+    margin: 40px auto;
+    border-radius: 24px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.6s ease-out forwards;
+    transition: all 0.5s ease-in-out;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--highlight));
+    background-size: 200% 200%;
+    animation: gradientBg 5s ease infinite;
+}
+
+/* Модифікатор контейнера коли вікно деталей відкрите */
+.containerShifted {
+    width: 70% !important;
+    margin-left: 3% !important;
+    animation: moveToRight 0.5s ease-in-out forwards;
+}
+
+/* Повернення контейнера в початковий стан */
+.containerNormal {
+    animation: moveBackToCenter 0.5s ease-in-out forwards;
+    left: -14%;
+}
+
+/* Заголовок */
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 50px;
+    border-bottom: 1px solid var(--border-color);
+    animation: slideInUp 0.7s ease-out forwards;
+}
+
+.headerTopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.headerTitle {
+    color: var(--text-light);
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0;
+    position: relative;
+    letter-spacing: -0.5px;
+}
+
+.headerTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 70px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Форма пошуку */
+.searchForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.searchTypeContainer {
+    margin-top: 10px;
+}
+
+.headerText {
+    display: block;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.radioButtonsAndTexts {
+    display: flex;
+    gap: 40px;
+}
+
+.radioButtonOption {
+    position: relative;
+}
+
+.radioButtonText {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.radioButtonText:hover {
+    color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.radioButtonText input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radioButtonText input[type="radio"]:checked {
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.radioButtonText input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.searchInputContainer {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.searchInput {
+    flex: 1;
+    background-color: var(--input-bg);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    color: var(--text-light);
+    font-size: 16px;
+    padding: 16px 24px;
+    outline: none;
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.searchInput::placeholder {
+    color: var(--text-secondary);
+}
+
+.searchInput:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.searchButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.searchButton:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.searchButton:disabled {
+    background-color: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Вміст сторінки */
+.contentContainer {
+    padding: 40px 50px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.errorMessage {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    padding: 15px 20px;
+    border-radius: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.errorMessage ion-icon {
+    font-size: 24px;
+}
+
+.noResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 285px;
+    color: var(--text-secondary);
+    font-size: 18px;
+    text-align: center;
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    width: 100%;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.searchIllustration {
+    font-size: 60px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+/* Картка результату пошуку */
+.resultCard {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    max-height: 380px;
+}
+
+
+.resultCard::-webkit-scrollbar {
+    width: 8px;
+    ;
+}
+
+.resultCard::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.resultCard::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.resultCard::-webkit-scrollbar-thumb:hover {
+    background-color: #a472ff;
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.resultHeader {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.resultHeader h2 {
+    color: var(--text-light);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.idBadge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.resultContent {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.clientInfoRow {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.infoGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.infoGroup label {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.infoGroup span {
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.detailsButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: all 0.3s ease;
+}
+
+.detailsButton:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Контейнер детальної інформації про клієнта */
+.clientDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    width: 24%;
+    margin: 40px auto;
+    border-radius: 24px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    animation: slideInFromRight 0.5s ease-in-out forwards;
+    margin-right: 40px;
+}
+
+.clientInfoClosing {
+    animation: slideOutToRight 0.5s ease-in-out forwards;
+}
+
+.clientDetailsContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--highlight));
+    background-size: 200% 200%;
+    animation: gradientBg 5s ease infinite;
+}
+
+.clientDetailsHeader {
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 120px;
+}
+
+.clientDetailsTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.closeButton {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+}
+
+.closeButton:hover {
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.closeButton:not(:hover) {
+    background: var(--card-bg);
+    transition: all 0.3s ease;
+}
+
+.clientDetailsContent {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: auto;
+    max-height: calc(85vh - 120px);
+}
+
+.clientDetailsContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.clientDetailsContent::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.clientDetailsContent::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.clientDetailsContent::-webkit-scrollbar-thumb:hover {
+    background-color: #a472ff;
+}
+
+/* Профіль клієнта */
+.clientProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.avatarPlaceholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--highlight));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+.clientName {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.clientStatus {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Контактна інформація */
+.clientContact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-light);
+}
+
+.contactItem ion-icon {
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+/* Інформація про замовлення */
+.orderSection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.orderSection h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.orderItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderId {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.orderDate {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.orderDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderStatus, .orderAmount {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
