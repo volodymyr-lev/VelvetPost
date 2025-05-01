@@ -242,7 +242,7 @@ export default function Clients() {
                             {clientDetails.shipments.map((order) => (
                                 <div key={order.id} className={styles.orderItem}>
                                     <div className={styles.orderHeader}>
-                                        <span className={styles.orderId}>{order.id}</span>
+                                        <span className={styles.orderId}>ID: {order.id}</span>
                                         <span className={styles.orderDate}>{order.date}</span>
                                     </div>
                                     <div className={styles.orderDetails}>
@@ -252,7 +252,7 @@ export default function Clients() {
                                         </div>
                                         <div className={styles.orderAmount}>
                                             <span>Сума:</span>
-                                            <span className={styles.amountValue}>{order.amount} грн</span>
+                                            <span className={styles.amountValue}>{order.price} грн</span>
                                         </div>
                                     </div>
                                 </div>

@@ -679,3 +679,21 @@
     align-items: center;
     gap: 8px;
 }
+
+
+.orderStatus{
+    color: #fff;
+}
+
+.statusBadge{
+    color:var(--primary-color)
+}
+
+
+.orderAmount{
+    color: #fff;
+}
+
+.amountValue{
+    color:var(--primary-color)
+}
