@@ -2,9 +2,11 @@
 import React from "react";
 import styles from "../styles/Shipments.module.css";
 import { getShipmentById } from "../api/ShipmentsApi";
+import EditShipmentModal from "../components/EditShipmentModal";
+
 export default function Shipments(){
     const [searchTerm, setSearchTerm] = React.useState("");
-
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [shipment, setShipment] = React.useState(null);
 
     const handleSearch = async () => {
@@ -33,6 +35,7 @@ export default function Shipments(){
                     {shipment && (
                     <button
                         className={styles.editButton}
+                        onClick={() => setIsModalOpen(true)}
                     >
                         <ion-icon name="create-outline"></ion-icon>
                         Редагувати
@@ -199,6 +202,15 @@ export default function Shipments(){
                         </p>
                     </div>
                 </div>
+            )}
+
+
+            {isModalOpen && (
+                <EditShipmentModal 
+                    shipment={shipment}
+                    setIsModalOpen={setIsModalOpen}
+                    onSave={fetchShipment}
+                    />
             )}
 
         </div>

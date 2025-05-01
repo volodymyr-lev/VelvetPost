@@ -1,0 +1,219 @@
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+.modal {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    width: 90%;
+    max-width: 650px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: modalAppear 0.3s ease-out;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal h2 {
+    color: var(--text-light);
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+
+/* Стилі для групи полів */
+.formGroup {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.fieldContainer {
+    flex: 1;
+    min-width: 200px;
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.modal input, 
+.modal select {
+    justify-self: center;
+    align-self: center;
+    color: #fff;
+    background: var(--input-bg);
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modal input:focus, 
+.modal select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 7px var(--primary-color);
+}
+
+.modal input:disabled {
+    background-color: #3a3a3a;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.modal input[type="datetime-local"] {
+    font-family: inherit;
+}
+
+.modalButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.modalButtons button {
+    width: 200px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.modalButtons button:first-child {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modalButtons button:first-child:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.modalButtons button:last-child {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.modalButtons button:last-child:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Стилі для скроллбару */
+.modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+}
+
+/* Додатковий стиль для вибору типу посилки */
+.modal select[name="parcelType"] {
+    width: 98%;
+}
+.modal select[name="parcelStatus"] {
+    width: 98%;
+}
+
+
+.editShipment{
+    width: 100%;
+}
+
+.parcelTitleContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+    width: 100%;
+}
+
+.parcelTitle{
+    color: var(--text-light);
+
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.longFieldStyle{
+    display: flex;
+    align-self: center;
+}
