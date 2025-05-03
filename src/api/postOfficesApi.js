@@ -97,3 +97,21 @@ export const createPostOffice = async (postOffice) =>{
         return null;
     }
 }
+
+export const getPostOfficeById = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`https://localhost:7047/api/PostOffices/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        return response.data;
+    }
+    catch (error) {
+        console.error("Error fetching post office by ID: ", error);
+        throw error;
+    }
+}

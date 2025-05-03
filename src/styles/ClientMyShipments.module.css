@@ -43,6 +43,37 @@
     height: 60px;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
+    justify-content: space-between;
+}
+
+.sortButtons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 13px;
+    gap: 10px;
+}
+
+.sendOrReceiveButton{
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    margin-top: 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.sortButtons button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
 }
 
 .leftContainerTitle h2 {
@@ -222,7 +253,7 @@
 
 .detailsContainer {
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .detailsSection {
