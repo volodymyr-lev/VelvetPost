@@ -17,6 +17,8 @@ import Terminals from "./pages/Terminals"
 import Employees from "./pages/Employees"
 import Clients from "./pages/Clients"
 import Shipments from "./pages/Shipments"
+import ClientCreateShipment from "./pages/ClientCreateShipment"
+import ClientMyShipments from "./pages/ClientMyShipments"
 
 function App() {
 	return(
@@ -56,6 +58,16 @@ function App() {
 					<Route path="/shipments" element={
 						<PrivateRoute allowedRoles={["Admin"]}>
 							<Shipments/>
+						</PrivateRoute>
+					}/>
+					<Route path="/client-create-shipment" element={
+						<PrivateRoute allowedRoles={["Client"]}>
+							<ClientCreateShipment/>
+						</PrivateRoute>
+					}/>
+					<Route path="/client-my-shipments" element={
+						<PrivateRoute allowedRoles={["Client"]}>
+							<ClientMyShipments/>
 						</PrivateRoute>
 					}/>
 				</Routes>

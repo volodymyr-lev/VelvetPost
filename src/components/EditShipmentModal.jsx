@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/EditShipmentModal.module.css";
+import { editShipment } from "../api/ShipmentsApi";
 
 export default function EditShipmentModal({ shipment, setIsModalOpen, onSave }) {
     const [form, setForm] = useState({
@@ -7,28 +8,28 @@ export default function EditShipmentModal({ shipment, setIsModalOpen, onSave }) 
         receiverId: shipment.receiverId,
         fromPostOfficeId: shipment.fromPostOfficeId,
         toPostOfficeId: shipment.toPostOfficeId,
-        parcelId: shipment.parcel?.id ,
+        parcelId: (shipment.parcel !== null) ? shipment.parcel.id : null,
         createdAt: shipment.createdAt,
-        deliveredAt: shipment.deliveredAt || "",
+        deliveredAt: shipment.deliveredAt || null,
         status: shipment.status,
         price: shipment.price,
-        parcelWeight: shipment.parcel?.weight || "",
-        parcelType: shipment.parcel?.type || ""
+        parcelWeight: shipment.parcel?.weight || null,
+        parcelType: shipment.parcel?.type || null
     });
-    console.log("shipment data:", shipment);
+
     useEffect(() => {
         setForm({
             senderId: shipment.senderId,
             receiverId: shipment.receiverId,
             fromPostOfficeId: shipment.fromPostOfficeId,
             toPostOfficeId: shipment.toPostOfficeId,
-            parcelId: shipment.parcel?.id ,
+            parcelId: (shipment.parcel !== null) ? shipment.parcel.id : null,
             createdAt: shipment.createdAt,
-            deliveredAt: shipment.deliveredAt || "",
+            deliveredAt: shipment.deliveredAt || null,
             status: shipment.status,
             price: shipment.price,
-            parcelWeight: shipment.parcel?.weight || "",
-            parcelType: shipment.parcel?.type || ""
+            parcelWeight: shipment.parcel?.weight || null,
+            parcelType: shipment.parcel?.type || null
         });
     }, [shipment]);
 
@@ -42,33 +43,13 @@ export default function EditShipmentModal({ shipment, setIsModalOpen, onSave }) 
 
     const handleSave = async () => {
         try {
-            // Оновлення відправлення
-            // await updateShipment(shipment.id, {
-            //     senderId: form.senderId,
-            //     receiverId: form.receiverId,
-            //     fromPostOfficeId: form.fromPostOfficeId,
-            //     toPostOfficeId: form.toPostOfficeId,
-            //     parcelId: form.parcelId,
-            //     createdAt: form.createdAt,
-            //     deliveredAt: form.deliveredAt || null,
-            //     status: form.status,
-            //     price: form.price
-            // });
-
-            // Посилка
-            if (shipment.parcel === null) {
-                // Створити нову
-                // await createParcel(shipment.id, { 
-                //     weight: form.parcelWeight, 
-                //     type: form.parcelType 
-                // });
-            } else {
-                // Оновити існуючу
-                // await updateParcel(shipment.parcel.id, { 
-                //     weight: form.parcelWeight, 
-                //     type: form.parcelType 
-                // });
+            console.log(form);
+            if(shipment.parcel !== null && form.parcelId === "")
+            {
+                form.parcelId = null;
             }
+
+            await editShipment(shipment.id, form);
 
             onSave();
             setIsModalOpen(false);
@@ -170,7 +151,7 @@ export default function EditShipmentModal({ shipment, setIsModalOpen, onSave }) 
                     </div>
                     <div className={styles.fieldContainer}>
                         <label>Тип посилки:</label>
-                        <select name="parcelType" value={form.parcelType} onChange={handleChange}>
+                        <select name="parcelType" value={(shipment.parcel===null && form.parcelWeight === null)?"":form.parcelType} onChange={handleChange}>
                             <option value="" disabled>Виберіть тип</option>
                             <option value="Посилка">Посилка</option>
                             <option value="Лист">Лист</option>

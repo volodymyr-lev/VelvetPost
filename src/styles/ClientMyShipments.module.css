@@ -1,0 +1,382 @@
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 120px);
+    min-height: 600px;
+    color: var(--text-light);
+}
+
+.leftContainer {
+    width: 500px;
+    margin: 20px;
+    margin-left: 150px;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.leftContainerTitle {
+    display: flex;
+    padding: 16px 20px;
+    height: 60px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.leftContainerTitle h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.leftContainerContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.leftContainerContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.leftContainerContent::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.leftContainerContent::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.leftContainerContent::-webkit-scrollbar-thumb:hover {
+    background-color: #a472ff;
+}
+
+
+.shipmentsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shipmentCard {
+    background-color: #282828;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.shipmentCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.selectedShipment {
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(164, 114, 255, 0.1);
+}
+
+.shipmentCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.shipmentCardHeader h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.shipmentCardDetails {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.shipmentDate {
+    margin: 4px 0;
+}
+
+.shipmentRoute {
+    margin: 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.statusDelivered {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
+}
+
+.statusInTransit {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--warning-color);
+}
+
+.statusPending {
+    background-color: rgba(67, 139, 255, 0.2);
+    color: var(--highlight);
+}
+
+.statusDefault {
+    background-color: rgba(156, 163, 175, 0.2);
+    color: var(--text-secondary);
+}
+
+.loadingIndicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-secondary);
+}
+
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--error-color);
+    padding: 16px;
+    text-align: center;
+}
+
+.emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px;
+}
+
+/* Right Container - Shipment Details */
+.rightContainer {
+    margin: 20px;
+    margin-right: 150px;
+    flex: 1;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    overflow: auto;
+}
+
+.shipmentDetails {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.shipmentDetailsHeader {
+    padding: 20px;
+    height: 52px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shipmentDetailsHeader h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.detailsContainer {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.detailsSection {
+    margin-bottom: 32px;
+}
+
+.detailsSection h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--primary-light);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(164, 114, 255, 0.3);
+}
+
+.detailItem {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.detailLabel {
+    flex: 0 0 160px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.detailValue {
+    flex: 1;
+    font-weight: 500;
+}
+
+.routeInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.routePoint {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.routeMarker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.routeConnector {
+    padding-left: 14px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.routeLine {
+    width: 2px;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.routeAddress {
+    margin: 0;
+    font-weight: 500;
+}
+
+.routeAddressDetails {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.trackingTimeline {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.trackingEvent {
+    display: flex;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.trackingEventTime {
+    flex: 0 0 160px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding-right: 16px;
+    text-align: right;
+}
+
+.trackingEventPoint {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin: 4px 16px 0 0;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.trackingEventPoint::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: calc(100% + 24px);
+    background-color: rgba(164, 114, 255, 0.3);
+    top: 12px;
+    left: 5px;
+    z-index: 0;
+}
+
+.trackingEvent:last-child .trackingEventPoint::after {
+    display: none;
+}
+
+.trackingEventInfo {
+    flex: 1;
+}
+
+.trackingEventStatus {
+    margin: 0;
+    font-weight: 500;
+}
+
+.trackingEventLocation {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+}
+
+.trackingEventComment {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.noSelectionState {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary);
+    padding: 20px;
+    text-align: center;
+}

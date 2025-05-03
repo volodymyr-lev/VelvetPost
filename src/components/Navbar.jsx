@@ -64,6 +64,24 @@ export default function Navbar(){
                             </li>
                         </>
                     )}
+                    {localStorage.getItem("role")==="Client" &&(
+                        <>
+                            <li>
+                                <NavLink to="/client-create-shipment" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Створити відправлення
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/client-my-shipments" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Мої відправлення
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </div>
 
                 <div className="navbar-right">
