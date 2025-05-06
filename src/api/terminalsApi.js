@@ -76,3 +76,21 @@ export const createTerminal = async (terminal) =>{
         throw error;
     }
 }
+
+export const getTerminalById = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`https://localhost:7047/api/Terminals/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        return response.data;
+    }
+    catch (error) {
+        console.error("Помилка при отриманні термінала за ID: ", error);
+        throw error;
+    }
+}

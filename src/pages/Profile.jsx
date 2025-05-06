@@ -7,6 +7,7 @@ import "../styles/Profile.css"
 import ClientProfile from "../components/ClientProfile";
 import AdminProfile from "../components/AdminProfile";
 import PostOfficeEmployeeProfile from "../components/PostOfficeEmployeeProfile";
+import TerminalEmployeeProfile from "../components/TerminalEmployeeProfile";
 
 const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 //Geocode conf
@@ -23,12 +24,14 @@ export default function Profile(){
     console.log(profile);
 
     useEffect(() => {
-        const map = document.querySelector('.leaflet-container');
+        const map = document.querySelector('.leaflet-container')
+        if(map === null) return;
         if (map) {
             map.addEventListener('load', () => {
                 map.style.transition = "all 0.5s ease";
             });
         }
+
 
         const fetchPostOfficesWithCords = async () => {
             try{
@@ -53,6 +56,9 @@ export default function Profile(){
             )}
             {localStorage.getItem("role")==="PostOfficeEmployee" && (
                 <PostOfficeEmployeeProfile profile={profile}/>
+            )}
+            {localStorage.getItem("role")==="TerminalEmployee" && (
+                <TerminalEmployeeProfile profile={profile}/>
             )}
         </div>
     )

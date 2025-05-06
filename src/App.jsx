@@ -21,6 +21,9 @@ import ClientCreateShipment from "./pages/ClientCreateShipment"
 import ClientMyShipments from "./pages/ClientMyShipments"
 import PostOfficeEmployeeCreateShipment from "./pages/PostOfficeEmployeeCreateShipment"
 import PostOfficeEmployeeShipments from "./pages/PostOfficeEmployeeShipments"
+import PostOfficeStats from "./pages/PostOfficeStats"
+import TerminalEmployeeProfile from "./components/TerminalEmployeeProfile"
+import TerminalShipmentsOverview from "./pages/TerminalShipmentsOverview"
 
 function App() {
 	return(
@@ -80,6 +83,16 @@ function App() {
 					<Route path="/postOfficeEmployee-shipments" element={
 						<PrivateRoute allowedRoles={["PostOfficeEmployee"]}>
 							<PostOfficeEmployeeShipments/>
+						</PrivateRoute>
+					}/>
+					<Route path="/postOfficeStats" element={
+						<PrivateRoute allowedRoles={["PostOfficeEmployee"]}>
+							<PostOfficeStats/>
+						</PrivateRoute>
+					}/>
+					<Route path="/terminalShipmentsOverview" element={
+						<PrivateRoute allowedRoles={["TerminalEmployee"]}>
+							<TerminalShipmentsOverview/>
 						</PrivateRoute>
 					}/>
 				</Routes>

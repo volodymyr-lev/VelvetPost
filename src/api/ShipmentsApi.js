@@ -35,3 +35,20 @@ export const editShipment = async (id, updated) => {
         throw error;
     }
 }
+
+export const changeShipmentStatus = async (id, status) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.put(`https://localhost:7047/api/Shipments/${id}/status`, { status }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        return response.data;
+    } catch (error) {
+        console.error("Error changing shipment status: ", error);
+        throw error;
+    }
+}

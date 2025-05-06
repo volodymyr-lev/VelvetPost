@@ -1,0 +1,281 @@
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Main Container */
+.container {
+    padding: 1.5rem;
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+}
+
+/* Filter Row */
+.filterRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filterCard {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+    flex: 1;
+    min-width: 250px;
+}
+
+.filterLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.select {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    color: var(--text-light);
+}
+
+/* Stats Cards Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.statsCard {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+}
+
+.iconContainer {
+    border-radius: 9999px;
+    padding: 0.75rem;
+    margin-right: 1rem;
+}
+
+.primaryIcon {
+    background-color: rgba(130, 63, 255, 0.2);
+    color: var(--primary-light);
+}
+
+.highlightIcon {
+    background-color: rgba(67, 139, 255, 0.2);
+    color: var(--highlight);
+}
+
+.successIcon {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
+}
+
+.warningIcon {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--warning-color);
+}
+
+.cardLabel {
+    color: var(--text-secondary);
+}
+
+.cardValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Charts Grid */
+.chartsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .chartsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.chartCard {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.chartTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Status Section */
+.statusCard {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.statusTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statusGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .statusGrid {
+    grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.statusItem {
+    background-color: var(--background-dark);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.statusBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Office Info */
+.officeCard {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.officeGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .officeGrid {
+    grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.officeItem {
+    background-color: var(--background-dark);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.officeLabel {
+    color: var(--text-secondary);
+}
+
+.officeValue {
+    font-weight: 500;
+}
+
+/* Loading Animation */
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: var(--text-light);
+}
+
+.loadingContent {
+    text-align: center;
+}
+
+.spinner {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.loadingText {
+    margin-top: 1rem;
+}
+
+@keyframes spin {
+    to {
+    transform: rotate(360deg);
+    }
+}

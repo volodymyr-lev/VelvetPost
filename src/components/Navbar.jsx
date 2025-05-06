@@ -99,8 +99,29 @@ export default function Navbar(){
                                     Перегляд відправлень
                                 </NavLink>
                             </li>
+                            {JSON.parse(localStorage.getItem("profile")).position === "Менеджер" && (
+                            <li>
+                                <NavLink to="/postOfficeStats" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Статистика відділення
+                                </NavLink>
+                            </li>
+                        )}
                         </>
                     )}
+                    {localStorage.getItem("role")==="TerminalEmployee" &&(
+                        <>
+                            <li>
+                                <NavLink to="/terminalShipmentsOverview" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Профіль терміналу
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
+
                 </div>
 
                 <div className="navbar-right">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/PostOfficeEmployeeShipments.module.css";
 import { getPostOfficeShipments } from "../api/postOfficesApi";
+import { changeShipmentStatus } from "../api/ShipmentsApi";
 
 export default function PostOfficeEmployeeShipments() {
     const mockShipments = [
@@ -57,15 +58,13 @@ export default function PostOfficeEmployeeShipments() {
         setFilteredShipments(filtered);
     }, [shipments, selectedStatus, searchQuery]);
 
-    const handleStatusChange = (shipmentId, newStatus) => {
-        const updatedShipments = shipments.map(shipment => {
-            if (shipment.id === shipmentId) {
-                return { ...shipment, status: newStatus };
-            }
-            return shipment;
-        });
-        setShipments(updatedShipments);
-        setSelectedShipment(null);
+    const handleStatusChange = async (shipmentId, newStatus) => {
+        try{
+            await changeShipmentStatus(Number(shipmentId), newStatus);
+            fetchShipments(); // Refresh the shipments after status change
+        } catch(error) {
+            console.error("Error changing shipment status: ", error);
+        }
     };
 
     return (
@@ -119,6 +118,7 @@ export default function PostOfficeEmployeeShipments() {
                                 </div>
                                 <div className={styles.cardContent}>
                                     <p>Отримувач: {shipment.receiverName}</p>
+                                    <p className={styles.cardAddress}>Адреса: {shipment.receiverAddress}</p>
                                 </div>
                             </div>
                         ))
@@ -152,14 +152,19 @@ export default function PostOfficeEmployeeShipments() {
                                 <span className={styles.detailsLabel}>Вага:</span>
                                 <span>{selectedShipment.parcel.weight} кг</span>
                             </div>
+                            <div className={styles.detailsRow}>
+                                <span className={styles.detailsLabel}>Вартість:</span>
+                                <span>{selectedShipment.price} грн</span>
+                            </div>
                             <div className={styles.sectionDivider}>
                                 <h4 className={styles.sectionTitle}>Відправник</h4>
                                 <p>{selectedShipment.senderName}</p>
+                                <p className={styles.detailsLabel}>{selectedShipment.senderAddress}</p>
                             </div>
                             <div className={styles.sectionDivider}>
                                 <h4 className={styles.sectionTitle}>Отримувач</h4>
                                 <p>{selectedShipment.receiverName}</p>
-                                <p className={styles.detailsLabel}>{selectedShipment.address}</p>
+                                <p className={styles.detailsLabel}>{selectedShipment.receiverAddress}</p>
                             </div>
                             <div>
                                 {selectedShipment.status === "В дорозі" ? (

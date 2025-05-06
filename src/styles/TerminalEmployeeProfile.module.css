@@ -1,0 +1,110 @@
+:root {
+    --primary-color: #a472ff;
+    --primary-dark: #823fff;
+    --primary-light: #b187ff;
+    --background-dark: #111827;
+    --card-bg: #2e2e2e;
+    --text-light: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --input-bg: #4c4c4c;
+    --highlight: #438bff;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.right {
+    display: flex;
+    height: 88%;
+    flex-direction: column;
+}
+
+.postOfficeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.postOfficeImgContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.postOfficeImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    object-fit: cover;
+    fill: var(--primary-color);
+}
+
+.postOfficeImage:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px var(--primary-color));
+    transition: 0.3s;
+}
+
+.postOfficeImage:not(:hover) {
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.postOfficeInfo {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.postOfficeName {
+    font-size: 1.5rem;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    height: 250px;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.infoItem:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.infoLabel {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.infoValue {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 1rem;
+}
