@@ -115,3 +115,22 @@ export const getPostOfficeById = async (id) => {
         throw error;
     }
 }
+
+
+
+export const getPostOfficeShipments = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`https://localhost:7047/api/PostOffices/${id}/shipments`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching shipments for post office: ", error);
+        throw error;
+    }
+}

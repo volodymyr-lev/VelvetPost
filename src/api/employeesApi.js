@@ -129,3 +129,23 @@ export const deleteEmployee = async (id, depType) => {
         throw error;
     }
 }
+
+
+
+
+// PostOfficeEmployeeCreateShipmentWithParcel
+export const createShipmentWithParcel = async (shipment) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.post("https://localhost:7047/api/PostOfficeEmployees/CreateShipmentWithParcel", shipment, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating shipment with parcel: ", error);
+        throw error;
+    }
+}

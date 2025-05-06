@@ -19,6 +19,8 @@ import Clients from "./pages/Clients"
 import Shipments from "./pages/Shipments"
 import ClientCreateShipment from "./pages/ClientCreateShipment"
 import ClientMyShipments from "./pages/ClientMyShipments"
+import PostOfficeEmployeeCreateShipment from "./pages/PostOfficeEmployeeCreateShipment"
+import PostOfficeEmployeeShipments from "./pages/PostOfficeEmployeeShipments"
 
 function App() {
 	return(
@@ -68,6 +70,16 @@ function App() {
 					<Route path="/client-my-shipments" element={
 						<PrivateRoute allowedRoles={["Client"]}>
 							<ClientMyShipments/>
+						</PrivateRoute>
+					}/>
+					<Route path="/postOfficeEmployee-create-shipment" element={
+						<PrivateRoute allowedRoles={["PostOfficeEmployee"]}>
+							<PostOfficeEmployeeCreateShipment/>
+						</PrivateRoute>
+					}/>
+					<Route path="/postOfficeEmployee-shipments" element={
+						<PrivateRoute allowedRoles={["PostOfficeEmployee"]}>
+							<PostOfficeEmployeeShipments/>
 						</PrivateRoute>
 					}/>
 				</Routes>

@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import "../styles/Profile.css"
 import ClientProfile from "../components/ClientProfile";
 import AdminProfile from "../components/AdminProfile";
+import PostOfficeEmployeeProfile from "../components/PostOfficeEmployeeProfile";
 
 const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 //Geocode conf
@@ -49,6 +50,9 @@ export default function Profile(){
             )}
             {localStorage.getItem("role")==="Admin" && (
                 <AdminProfile profile={profile}/>
+            )}
+            {localStorage.getItem("role")==="PostOfficeEmployee" && (
+                <PostOfficeEmployeeProfile profile={profile}/>
             )}
         </div>
     )

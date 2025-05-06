@@ -82,6 +82,25 @@ export default function Navbar(){
                             </li>
                         </>
                     )}
+
+                    {localStorage.getItem("role")==="PostOfficeEmployee" &&(
+                        <>
+                            <li>
+                                <NavLink to="/postOfficeEmployee-create-shipment" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Створити відправлення
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/postOfficeEmployee-shipments" 
+                                className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
+                                >
+                                    Перегляд відправлень
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </div>
 
                 <div className="navbar-right">
