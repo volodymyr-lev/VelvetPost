@@ -116,7 +116,7 @@ export default function Navbar(){
                                 <NavLink to="/terminalShipmentsOverview" 
                                 className={({isActive})=>isActive?"navbar-item active":"navbar-item"}
                                 >
-                                    Профіль терміналу
+                                    Огляд терміналу
                                 </NavLink>
                             </li>
                         </>

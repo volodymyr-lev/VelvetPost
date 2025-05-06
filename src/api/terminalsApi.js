@@ -94,3 +94,23 @@ export const getTerminalById = async (id) => {
         throw error;
     }
 }
+
+
+
+export const getTermianlOvewiew = async (id) => {
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`https://localhost:7047/api/TerminalShipments/Overview/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        return response.data;
+    }
+    catch (error) {
+        console.error("Error fetching terminal overview: ", error);
+        throw error;
+    }
+}
