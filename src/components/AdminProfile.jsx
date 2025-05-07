@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/AdminProfile.css";
 import { PixelLetter } from "./PixelArt";
+import { DumpDb } from "../api/DumpDb";
 
 export default function AdminProfile({ profile }) {
+    const [isLoading, setIsLoading] = useState(false);
+
     const V = [
         [1,1,1,0,0,1,1,1],
         [1,1,1,0,0,1,1,1],
@@ -28,6 +31,46 @@ export default function AdminProfile({ profile }) {
         [1,1,1,0,0,0,0,0],
         [1,1,1,0,0,0,0,0],
     ];
+
+
+    const handleDownload = async () => {
+        setIsLoading(true);
+
+        try {            
+          
+            const response = await DumpDb();
+
+            if(response === null) {
+                console.error("Failed to fetch the database dump.");
+                setIsLoading(false);
+                return;
+            }
+
+            const blob = response.data;
+            
+            const url = window.URL.createObjectURL(blob);
+            
+
+            const link = document.createElement('a');
+            const filename = `velvet_post_db_export_${new Date().toISOString().split('T')[0]}.json`;
+            
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+            
+            console.log("Download completed!");
+        } catch (err) {
+            console.error("Error downloading database:", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
 
     return (
         <div className="admin-container">
@@ -85,6 +128,19 @@ export default function AdminProfile({ profile }) {
                     <li>Стеж за актуальністю відділень.</li>
                 </ul>
             </div>
+
+            <button 
+                className="admin-download" 
+                onClick={handleDownload}
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <span className="loading-spinner"></span>
+                ) : (
+                    <ion-icon name="download-outline"></ion-icon>
+                )}
+                {isLoading ? 'Завантаження...' : 'Завантажити дані'}
+            </button>
         </div>
     );
 }

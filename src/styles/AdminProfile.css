@@ -183,3 +183,33 @@
     opacity: 1;
     transition: opacity 0.5s ease;
 }
+
+
+
+
+
+.admin-download{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: 100px;
+    height: 60px;
+    background-color: #a472ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.admin-download:hover{
+    background-color: #8f5bff;
+    box-shadow: 0 4px 8px #a472ff;
+    cursor: pointer;
+    animation: slideUp 0.5s forwards;
+}
+
+.admin-download:not(:hover){
+    background-color: #8f5bff;
+    cursor: pointer;
+    animation: slideDown 0.5s forwards;
+}

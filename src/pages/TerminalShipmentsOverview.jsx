@@ -59,7 +59,11 @@ export default function TerminalShipmentsOverview() {
     }
 
     if (loading) {
-        return <div className={styles.loading}>Завантаження...</div>;
+        return (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "88vh" }}>
+            <h2 style={{color:'#fff'}}>Завантаження..</h2>    
+        </div>
+        );
     }
 
     return (
@@ -97,7 +101,7 @@ export default function TerminalShipmentsOverview() {
 
         {/* Графік динаміки посилок */}
         <div className={styles.chartCard}>
-            <h2 className={styles.chartTitle}>Динаміка посилок за останній тиждень</h2>
+            <h2 className={styles.chartTitle}>Динаміка посилок</h2>
             <ResponsiveContainer width="100%" height={300}>
             <LineChart data={shipmentData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />

@@ -6,6 +6,7 @@ import {
 import { Calendar, Filter, Package, TrendingUp, Users, Map, Clock, AlertCircle } from "lucide-react";
 import styles from "../styles/PostOfficeStats.module.css";
 import { getStatsByPostOfficeId } from "../api/StatsApi";
+import _ from "lodash";
 
 export default function PostOfficeStats() {
     const [selectedOffice, setSelectedOffice] = useState(null); 
@@ -31,6 +32,26 @@ export default function PostOfficeStats() {
 
     // Colors for charts
     const COLORS = ["#a472ff", "#823fff", "#b187ff", "#438bff", "#10b981", "#f59e0b"];
+
+    const groupDailyShipmentsByDay = (dailyShipments) => {
+        const grouped = _.groupBy(dailyShipments, 'name');
+        
+        return Object.keys(grouped).map(date => {
+            const entries = grouped[date];
+            
+            // Сумуємо значення sent і received за цей день
+            const totalSent = _.sumBy(entries, 'sent');
+            const totalReceived = _.sumBy(entries, 'received');
+            
+            return {
+                date,
+                name: date, 
+                sent: totalSent,
+                received: totalReceived,
+                total: totalSent + totalReceived
+            };
+        });
+    };
 
     if (loading) {
         return (
@@ -107,7 +128,7 @@ export default function PostOfficeStats() {
                     <h2 className={styles.chartTitle}>Щоденні відправлення</h2>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart
-                            data={stats.dailyShipments}
+                            data={groupDailyShipmentsByDay(stats.dailyShipments)}
                             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                         >
                             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
